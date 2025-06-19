@@ -23,4 +23,5 @@ def ping_mexc(repeats=5):
         print("\n❌ Keine erfolgreiche Verbindung zu MEXC.")
 
 if __name__ == "__main__":
-    ping_mexc()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
