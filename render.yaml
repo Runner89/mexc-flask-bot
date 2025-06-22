@@ -1,11 +1,11 @@
 services:
   - type: web
-    name: latency-ohio
+    name: latency-singapore
     env: node
-    region: ohio
+    region: singapore
     plan: free
     buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: LOCATION
-        value: ohio
+        value: singapore
