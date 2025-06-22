@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: latency-frankfurt
+    name: latency-singapore
     env: node
     region: frankfurt
     plan: free
@@ -8,4 +8,4 @@ services:
     startCommand: npm start
     envVars:
       - key: LOCATION
-        value: frankfurt
+        value: singapore
