@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: latency-frankfurt
+    env: node
+    region: frankfurt
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: LOCATION
+        value: frankfurt
