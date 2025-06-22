@@ -1,28 +1,38 @@
-// ping.js
+const express = require('express');
 const axios = require('axios');
 
-async function measureLatency() {
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Optional: JSON body parsing, falls du JSON im Request willst
+app.use(express.json());
+
+app.post('/ping', async (req, res) => {
   const targetUrl = 'https://api.mexc.com/api/v3/time';
   const start = Date.now();
 
   try {
-    await axios.get(targetUrl, { timeout: 5000 }); // max 5s warten
+    await axios.get(targetUrl, { timeout: 5000 });
     const latency = Date.now() - start;
 
+    const location = process.env.LOCATION || "unknown";
+
     const result = {
-      location: process.env.LOCATION || "unknown",
+      location: location,
       timestamp: new Date().toISOString(),
       latency_ms: latency
     };
 
-    console.log(JSON.stringify(result));
+    res.json(result);
   } catch (err) {
-    console.error(JSON.stringify({
+    res.status(500).json({
       location: process.env.LOCATION || "unknown",
       timestamp: new Date().toISOString(),
       error: err.message
-    }));
+    });
   }
-}
+});
 
-measureLatency();
+app.listen(port, () => {
+  console.log(`Latency server running on port ${port}`);
+});
